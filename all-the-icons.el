@@ -925,6 +925,22 @@ pause for DURATION seconds between printing each character."
        (when duration (sit-for duration 0)))
      data)))
 
+;;;###autoload
+(defun all-the-icons-ivy ()
+  "Insert an icon selected using Ivy."
+  (interactive)
+  (ivy-read "Icon: "
+            (all-the-icons--read-ivy-candidates)
+            :action (lambda (inp)
+                      (insert (get-char-property 0 'candidate-icon inp)))
+            :caller 'all-the-icons-ivy))
+
+(defun all-the-icons--read-ivy-candidates ()
+  "Return candidates for `all-the-icons-ivy'."
+  (mapcar (lambda (cell)
+            (propertize (car cell) 'candidate-icon (cdr cell)))
+          (all-the-icons--read-candidates)))
+
 (defmacro define-icon (name alist family &optional font-name)
   "Macro to generate functions for inserting icons for icon set NAME.
 
