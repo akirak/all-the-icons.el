@@ -97,6 +97,8 @@
 
 (require 'all-the-icons-faces)
 
+(declare-function 'ivy-read "ext:ivy")
+
 ;;; Custom Variables
 (defgroup all-the-icons nil
   "Manage how All The Icons formats icons."
